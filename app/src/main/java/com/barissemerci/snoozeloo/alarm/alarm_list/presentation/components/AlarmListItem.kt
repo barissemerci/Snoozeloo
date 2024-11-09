@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
@@ -54,7 +55,7 @@ fun AlarmListItem(
                 Switch(
                     colors = SwitchDefaults.colors(
                         checkedThumbColor = Color.White,
-                        checkedTrackColor = Color.Blue,
+                        checkedTrackColor = MaterialTheme.colorScheme.primary,
                         uncheckedThumbColor = Color.White,
                         uncheckedTrackColor = Color.Gray
                     ),
