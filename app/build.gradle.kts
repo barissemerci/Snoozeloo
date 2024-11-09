@@ -70,5 +70,12 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(libs.core.splashscreen)
+    implementation(libs.koin.core)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.android.workmanager)
+    implementation(libs.koin.androidx.compose)
+
+
 
 }
