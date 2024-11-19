@@ -13,3 +13,7 @@ val Pink40 = Color(0xFF7D5260)
 val SnoozelooBlue = Color(0xFF4664FF)
 val SnoozelooGray = Color(0xFFF6F6F6)
 
+val SnoozelooMediumGray = Color(0xFFE6E6E6)
+
+val SnoozelooDarkGray = Color(0xFF858585)
+

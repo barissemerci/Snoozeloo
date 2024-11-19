@@ -4,6 +4,7 @@ import android.app.Activity
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
@@ -12,7 +13,10 @@ private val LightColorScheme = lightColorScheme(
     primary = SnoozelooBlue,
     secondary = PurpleGrey40,
     tertiary = Pink40,
-    surface = SnoozelooGray
+    surface = SnoozelooGray,
+    onSurface = SnoozelooDarkGray,
+    onSurfaceVariant = SnoozelooMediumGray,
+    background = Color.White
 
 
     /* Other default colors to override
