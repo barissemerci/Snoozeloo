@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.input.TextFieldLineLimits
-import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -23,7 +21,8 @@ import com.barissemerci.snoozeloo.ui.theme.SnoozelooTheme
 
 @Composable
 fun TimeTextField(
-    state: TextFieldState,
+    value: String,
+    onValueChange: (String) -> Unit,
     keyboardType: KeyboardType = KeyboardType.Number,
     modifier: Modifier = Modifier
 ) {
@@ -36,18 +35,21 @@ fun TimeTextField(
 
 
     ) {
+
+
         BasicTextField(
-            state = state,
+            value = value,
+            onValueChange = onValueChange,
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType,
             ),
+
             textStyle = LocalTextStyle.current.copy(
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 64.sp,
                 lineHeight = 64.sp,
                 textAlign = TextAlign.Center
             ),
-            lineLimits = TextFieldLineLimits.SingleLine,
 
 
             )
@@ -62,7 +64,8 @@ fun TimeTextField(
 private fun TimeTextFieldPreview() {
     SnoozelooTheme {
         TimeTextField(
-            state = TextFieldState()
+            value = "12:00",
+            onValueChange = { }
         )
     }
 }
