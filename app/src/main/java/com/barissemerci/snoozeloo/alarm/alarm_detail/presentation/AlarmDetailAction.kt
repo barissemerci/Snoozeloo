@@ -8,5 +8,5 @@ sealed interface AlarmDetailAction {
     data object OnNameClick : AlarmDetailAction
     data class OnHourChange (val hour: String) : AlarmDetailAction
     data class OnMinuteChange (val minute: String) : AlarmDetailAction
-    data class OnSaveAlarmNameClick(val alarmName: String) : AlarmDetailAction
+    data class OnSaveNameClick(val alarmName: String) : AlarmDetailAction
 }

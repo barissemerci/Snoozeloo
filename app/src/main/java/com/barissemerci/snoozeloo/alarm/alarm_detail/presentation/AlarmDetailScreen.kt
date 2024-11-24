@@ -153,18 +153,16 @@ private fun AlarmDetailScreen(
                     fontSize = 16.sp,
                     color = Color.Black
                 )
-                Text(text = "Work", fontSize = 14.sp)
+                Text(text = state.alarmName, fontSize = 14.sp)
             }
         }
         if(state.isNameEditing){
             SnoozelooDialog(
                 title = stringResource(R.string.alarm_name),
                 onDissmiss = { onAction(AlarmDetailAction.OnNameClick) },
-                primaryButton = {
-                    Button(onClick = {  }) {
-                        Text(text = stringResource(R.string.save))
-                    }
-                }
+                onSaveClick = { onAction(AlarmDetailAction.OnSaveNameClick(it)) },
+                name = state.alarmName,
+
             )
         }
 

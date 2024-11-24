@@ -14,25 +14,32 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.barissemerci.snoozeloo.R
 import com.barissemerci.snoozeloo.ui.theme.SnoozelooTheme
 
 @Composable
 fun SnoozelooDialog(
     title: String,
+    name: String?,
     onDissmiss: () -> Unit,
-    primaryButton: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    secondaryButton: @Composable () -> Unit = {}
+    onSaveClick: (String) -> Unit,
 
 ) {
+    var text by remember { mutableStateOf(name) }
     Dialog(onDismissRequest = onDissmiss) {
 
         Column(
@@ -49,23 +56,29 @@ fun SnoozelooDialog(
                 color = Color.Black,
             )
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = text ?: "",
+                singleLine = true,
+                onValueChange = {
+                    text = it
+                },
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = MaterialTheme.colorScheme.onSurfaceVariant,
                     unfocusedBorderColor = MaterialTheme.colorScheme.onSurfaceVariant,
 
                 ),
-                modifier = Modifier.fillMaxWidth().height(36.dp)
+                modifier = Modifier.fillMaxWidth().height(56.dp).padding(0.dp)
             )
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                secondaryButton()
-                primaryButton()
+
+                Button(onClick ={onSaveClick(text.toString())}
+                ) {
+                    Text(text = stringResource(R.string.save))
+                }
             }
         }
     }
@@ -79,16 +92,9 @@ private fun SnoozelooDialogPreview() {
         SnoozelooDialog(
             title = "Alarm Name",
             onDissmiss = {},
-            primaryButton = {
-               Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Save")
-                }
-            },
-            secondaryButton = {
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Cancel")
-                }
-            }
+            onSaveClick = {},
+            name = "Work",
+
 
         )
     }

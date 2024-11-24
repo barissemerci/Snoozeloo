@@ -15,40 +15,29 @@ class AlarmDetailViewModel : ViewModel() {
             AlarmDetailAction.OnCancelClick -> {
                 println("Cancel Clicked")
             }
-
             is AlarmDetailAction.OnSaveClick -> {
-
                 println("Save Clicked with ${action.alarmHour} ${action.alarmMinute} ${action.alarmName}")
             }
-
             AlarmDetailAction.OnNameClick -> {
                 state = state.copy(isNameEditing = !state.isNameEditing)
             }
-            is AlarmDetailAction.OnSaveAlarmNameClick -> {
+            is AlarmDetailAction.OnSaveNameClick -> {
+                state = state.copy(alarmName = action.alarmName, isNameEditing = false)
             }
-
             is AlarmDetailAction.OnHourChange -> {
-
                 val number = action.hour.toIntOrNull()
                 if (action.hour.isEmpty()) {
                     state = state.copy(alarmHour = action.hour)
-
                 } else if (number != null && number in 0..23) {
                     state = state.copy(alarmHour = action.hour)
-
                 }
-
             }
-
             is AlarmDetailAction.OnMinuteChange -> {
-
                 val number = action.minute.toIntOrNull()
                 if (action.minute.isEmpty()) {
                     state = state.copy(alarmMinute = action.minute)
-
                 } else if (number != null && number in 0..59) {
                     state = state.copy(alarmMinute = action.minute)
-
                 }
             }
 
