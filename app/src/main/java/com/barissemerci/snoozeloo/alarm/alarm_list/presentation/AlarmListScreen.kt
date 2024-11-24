@@ -25,11 +25,19 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 
 fun AlarmListScreenRoot(
-    viewModel: AlarmListViewModel = koinViewModel()
+    viewModel: AlarmListViewModel = koinViewModel(),
+    onAlarmClick: (id : Long) -> Unit,
+    onAddAlarmClick: () -> Unit
 ) {
     AlarmListScreen(
         state = viewModel.state,
-        onAction = viewModel::onAction
+        onAction = { action ->
+            when (action) {
+                AlarmListAction.OnAddAlarmClick -> onAddAlarmClick()
+                else -> Unit
+            }
+            viewModel.onAction(action)
+        }
     )
 
 }

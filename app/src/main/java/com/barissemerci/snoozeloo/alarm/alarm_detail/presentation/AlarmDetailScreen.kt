@@ -1,6 +1,7 @@
 package com.barissemerci.snoozeloo.alarm.alarm_detail.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.barissemerci.snoozeloo.R
+import com.barissemerci.snoozeloo.alarm.alarm_detail.presentation.components.SnoozelooDialog
 import com.barissemerci.snoozeloo.alarm.alarm_detail.presentation.components.TimeTextField
 import com.barissemerci.snoozeloo.core.presentation.SnoozelooToolBar
 import com.barissemerci.snoozeloo.ui.theme.SnoozelooTheme
@@ -37,7 +39,8 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 
 fun AlarmDetailScreenRoot(
-    viewModel: AlarmDetailViewModel = koinViewModel()
+    viewModel: AlarmDetailViewModel = koinViewModel(),
+    id : Long?
 ) {
 
     AlarmDetailScreen(
@@ -77,9 +80,9 @@ private fun AlarmDetailScreen(
                         onClick = {
                             onAction(
                                 AlarmDetailAction.OnSaveClick(
-                                    state.alarmHour.text.toString(),
-                                    state.alarmMinute.text.toString(),
-                                    state.alarmName.text.toString()
+                                    state.alarmHour,
+                                    state.alarmMinute,
+                                    state.alarmName
                                 )
                             )
                         }
@@ -111,14 +114,19 @@ private fun AlarmDetailScreen(
 
                 ) {
                     TimeTextField(
-                        state = state.alarmHour,
+                        value = state.alarmHour,
+                        onValueChange = { onAction(AlarmDetailAction.OnHourChange(it)) }
+
 
                         )
                     Spacer(modifier = Modifier.padding(8.dp))
                     Text(text = ":", fontSize = 32.sp, color = MaterialTheme.colorScheme.onSurface)
                     Spacer(modifier = Modifier.padding(8.dp))
                     TimeTextField(
-                        state = state.alarmMinute
+                        value = state.alarmMinute,
+                        onValueChange = { onAction(AlarmDetailAction.OnMinuteChange(it)) }
+
+
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -131,6 +139,9 @@ private fun AlarmDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(10.dp))
+                    .clickable {
+                        onAction(AlarmDetailAction.OnNameClick)
+                    }
                     .background(MaterialTheme.colorScheme.background)
                     .padding(16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -144,6 +155,17 @@ private fun AlarmDetailScreen(
                 )
                 Text(text = "Work", fontSize = 14.sp)
             }
+        }
+        if(state.isNameEditing){
+            SnoozelooDialog(
+                title = stringResource(R.string.alarm_name),
+                onDissmiss = { onAction(AlarmDetailAction.OnNameClick) },
+                primaryButton = {
+                    Button(onClick = {  }) {
+                        Text(text = stringResource(R.string.save))
+                    }
+                }
+            )
         }
 
 
