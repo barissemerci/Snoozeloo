@@ -1,6 +1,7 @@
 package com.barissemerci.snoozeloo
 
 import android.app.Application
+import com.barissemerci.snoozeloo.alarm.database.di.databaseModule
 import com.barissemerci.snoozeloo.alarm.di.alarmModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -14,7 +15,8 @@ class SnoozelooApp : Application() {
             androidLogger()
             androidContext(this@SnoozelooApp)
             modules(
-                alarmModule
+                alarmModule,
+                databaseModule
             )
         }
     }

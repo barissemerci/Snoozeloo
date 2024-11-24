@@ -1,6 +1,6 @@
 package com.barissemerci.snoozeloo.alarm.alarm_list.presentation
 
-import com.barissemerci.snoozeloo.alarm.alarm_list.domain.Alarm
+import com.barissemerci.snoozeloo.alarm.core.domain.Alarm
 
 sealed interface AlarmListAction {
     data class OnAlarmClick(val alarm: Alarm) : AlarmListAction

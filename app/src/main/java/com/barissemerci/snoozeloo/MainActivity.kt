@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.barissemerci.snoozeloo.alarm.alarm_list.presentation.AlarmListScreenRoot
+import com.barissemerci.snoozeloo.alarm.alarm_detail.presentation.AlarmDetailScreenRoot
 import com.barissemerci.snoozeloo.ui.theme.SnoozelooTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             SnoozelooTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AlarmListScreenRoot()
+                    AlarmDetailScreenRoot()
                 }
             }
         }
