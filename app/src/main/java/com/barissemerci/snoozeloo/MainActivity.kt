@@ -5,10 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.barissemerci.snoozeloo.alarm.alarm_detail.presentation.AlarmDetailScreenRoot
+import androidx.navigation.compose.rememberNavController
 import com.barissemerci.snoozeloo.ui.theme.SnoozelooTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,8 +20,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SnoozelooTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AlarmDetailScreenRoot()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    val navController = rememberNavController()
+                    NavigationRoot(
+                        navController = navController,
+                    )
                 }
             }
         }
