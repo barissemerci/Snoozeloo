@@ -4,4 +4,5 @@
     <string name="empty_list_info">It\'s empty! Add the first alarm so you\ndon\'t miss an important moment!</string>
     <string name="save">Save</string>
     <string name="alarm_name">Alarm Name</string>
+    <string name="enter_an_alarm_name">Enter an alarm name</string>
 </resources>

@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,6 +56,8 @@ private fun AlarmDetailScreen(
     state: AlarmDetailState,
     onAction: (AlarmDetailAction) -> Unit
 ) {
+    val focusManager = LocalFocusManager.current
+
     Scaffold(
         containerColor = MaterialTheme.colorScheme.surface,
         topBar = {
@@ -115,10 +118,7 @@ private fun AlarmDetailScreen(
                 ) {
                     TimeTextField(
                         value = state.alarmHour,
-                        onValueChange = { onAction(AlarmDetailAction.OnHourChange(it)) }
-
-
-                        )
+                        onValueChange = { onAction(AlarmDetailAction.OnHourChange(it)) })
                     Spacer(modifier = Modifier.padding(8.dp))
                     Text(text = ":", fontSize = 32.sp, color = MaterialTheme.colorScheme.onSurface)
                     Spacer(modifier = Modifier.padding(8.dp))
@@ -160,7 +160,8 @@ private fun AlarmDetailScreen(
             SnoozelooDialog(
                 title = stringResource(R.string.alarm_name),
                 onDissmiss = { onAction(AlarmDetailAction.OnNameClick) },
-                onSaveClick = { onAction(AlarmDetailAction.OnSaveNameClick(it)) },
+                onSaveClick = { onAction(AlarmDetailAction.OnSaveNameClick(it))
+                    focusManager.clearFocus()},
                 name = state.alarmName,
 
             )

@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.barissemerci.snoozeloo.R
+import com.barissemerci.snoozeloo.ui.theme.SnoozelooDarkGray
 import com.barissemerci.snoozeloo.ui.theme.SnoozelooTheme
 
 @Composable
@@ -38,7 +39,7 @@ fun SnoozelooDialog(
     modifier: Modifier = Modifier,
     onSaveClick: (String) -> Unit,
 
-) {
+    ) {
     var text by remember { mutableStateOf(name) }
     Dialog(onDismissRequest = onDissmiss) {
 
@@ -49,7 +50,7 @@ fun SnoozelooDialog(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
 
-        ) {
+            ) {
             Text(
                 text = title,
                 fontWeight = FontWeight.Bold,
@@ -61,12 +62,18 @@ fun SnoozelooDialog(
                 onValueChange = {
                     text = it
                 },
+                placeholder = {
+                    Text(text = stringResource(R.string.enter_an_alarm_name), color = SnoozelooDarkGray)
+                },
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = MaterialTheme.colorScheme.onSurfaceVariant,
                     unfocusedBorderColor = MaterialTheme.colorScheme.onSurfaceVariant,
 
-                ),
-                modifier = Modifier.fillMaxWidth().height(56.dp).padding(0.dp)
+                    ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+                    .padding(0.dp)
             )
 
             Row(
@@ -75,7 +82,7 @@ fun SnoozelooDialog(
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
-                Button(onClick ={onSaveClick(text.toString())}
+                Button(onClick = { onSaveClick(text.toString()) }
                 ) {
                     Text(text = stringResource(R.string.save))
                 }
@@ -96,7 +103,7 @@ private fun SnoozelooDialogPreview() {
             name = "Work",
 
 
-        )
+            )
     }
-    
+
 }
