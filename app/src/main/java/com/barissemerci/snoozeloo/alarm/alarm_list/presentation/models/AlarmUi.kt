@@ -9,3 +9,4 @@ data class AlarmUi(
     val isSwitchOn: Boolean
 )
 
+

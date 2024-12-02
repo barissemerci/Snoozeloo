@@ -1,11 +1,13 @@
 package com.barissemerci.snoozeloo.alarm.alarm_list.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.FabPosition
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,9 +17,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.barissemerci.snoozeloo.R
+import com.barissemerci.snoozeloo.alarm.alarm_list.presentation.components.AlarmListItem
 import com.barissemerci.snoozeloo.alarm.alarm_list.presentation.components.EmptyListInfo
 import com.barissemerci.snoozeloo.alarm.alarm_list.presentation.components.SnoozelooFloatingActionButton
-import com.barissemerci.snoozeloo.core.presentation.SnoozelooToolBar
+import com.barissemerci.snoozeloo.alarm.core.presentation.SnoozelooToolBar
 import com.barissemerci.snoozeloo.ui.AddIcon
 import com.barissemerci.snoozeloo.ui.theme.SnoozelooTheme
 import org.koin.androidx.compose.koinViewModel
@@ -50,6 +53,7 @@ private fun AlarmListScreen(
 ) {
 
     Scaffold(
+        modifier = Modifier.fillMaxSize(),
         floatingActionButtonPosition = FabPosition.Center,
         floatingActionButton = {
             SnoozelooFloatingActionButton(
@@ -68,31 +72,29 @@ private fun AlarmListScreen(
             )
         }
     ) { padding ->
-        Column(
-            modifier = Modifier
-                .padding(padding)
-                .padding(16.dp)
-        ) {
+
 
 
             if (state.alarms.isEmpty()) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Box(modifier = Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
                     EmptyListInfo()
                 }
             } else {
                 LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface).padding(padding).padding(horizontal = 8.dp),
                 ) {
-                    item {
+                    items(state.alarms) { alarm ->
+                        AlarmListItem(
+                            alarmUi = alarm,
 
+                            )
                     }
                 }
-            }
+
 
         }
     }
 }
-
 @Preview
 
 @Composable

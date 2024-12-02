@@ -56,7 +56,10 @@ private fun NavGraphBuilder.alarmGraph(navController: NavHostController) {
             val idString = backStackEntry.arguments?.getString("id")
             val id = idString?.toLongOrNull()
             AlarmDetailScreenRoot(
-                id = id
+                id = id,
+                onCancelClick = {
+                    navController.popBackStack()
+                }
             )
         }
         composable(

@@ -33,20 +33,29 @@ import androidx.compose.ui.unit.sp
 import com.barissemerci.snoozeloo.R
 import com.barissemerci.snoozeloo.alarm.alarm_detail.presentation.components.SnoozelooDialog
 import com.barissemerci.snoozeloo.alarm.alarm_detail.presentation.components.TimeTextField
-import com.barissemerci.snoozeloo.core.presentation.SnoozelooToolBar
+import com.barissemerci.snoozeloo.alarm.core.presentation.SnoozelooToolBar
 import com.barissemerci.snoozeloo.ui.theme.SnoozelooTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 
 fun AlarmDetailScreenRoot(
+
     viewModel: AlarmDetailViewModel = koinViewModel(),
+    onCancelClick: () -> Unit,
     id : Long?
 ) {
 
     AlarmDetailScreen(
         state = viewModel.state,
-        onAction = viewModel::onAction
+        onAction = {action ->
+            when(action){
+                AlarmDetailAction.OnCancelClick -> {
+                }
+                else -> Unit
+            }
+            viewModel.onAction(action)
+        }
     )
 }
 
