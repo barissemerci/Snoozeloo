@@ -1,4 +1,4 @@
-package com.barissemerci.snoozeloo.alarm.database
+package com.barissemerci.snoozeloo.alarm.core.database
 
 import android.database.sqlite.SQLiteFullException
 import com.barissemerci.snoozeloo.alarm.core.domain.Alarm
@@ -6,9 +6,9 @@ import com.barissemerci.snoozeloo.alarm.core.domain.AlarmId
 import com.barissemerci.snoozeloo.alarm.core.domain.LocalAlarmDataSource
 import com.barissemerci.snoozeloo.alarm.core.domain.util.DataError
 import com.barissemerci.snoozeloo.alarm.core.domain.util.Result
-import com.barissemerci.snoozeloo.alarm.database.dao.AlarmDao
-import com.barissemerci.snoozeloo.alarm.database.mapper.toAlarm
-import com.barissemerci.snoozeloo.alarm.database.mapper.toAlarmEntity
+import com.barissemerci.snoozeloo.alarm.core.database.dao.AlarmDao
+import com.barissemerci.snoozeloo.alarm.core.database.mapper.toAlarm
+import com.barissemerci.snoozeloo.alarm.core.database.mapper.toAlarmEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

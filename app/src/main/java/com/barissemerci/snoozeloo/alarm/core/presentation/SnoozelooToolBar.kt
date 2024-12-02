@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.barissemerci.snoozeloo.core.presentation
+package com.barissemerci.snoozeloo.alarm.core.presentation
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

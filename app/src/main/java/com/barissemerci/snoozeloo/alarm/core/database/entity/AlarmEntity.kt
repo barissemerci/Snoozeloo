@@ -1,4 +1,4 @@
-package com.barissemerci.snoozeloo.alarm.database.entity
+package com.barissemerci.snoozeloo.alarm.core.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

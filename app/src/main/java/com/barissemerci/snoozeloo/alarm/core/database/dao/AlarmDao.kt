@@ -1,9 +1,9 @@
-package com.barissemerci.snoozeloo.alarm.database.dao
+package com.barissemerci.snoozeloo.alarm.core.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
-import com.barissemerci.snoozeloo.alarm.database.entity.AlarmEntity
+import com.barissemerci.snoozeloo.alarm.core.database.entity.AlarmEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
