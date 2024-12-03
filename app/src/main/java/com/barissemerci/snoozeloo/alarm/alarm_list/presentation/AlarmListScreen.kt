@@ -1,6 +1,7 @@
 package com.barissemerci.snoozeloo.alarm.alarm_list.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -29,7 +30,7 @@ import org.koin.androidx.compose.koinViewModel
 
 fun AlarmListScreenRoot(
     viewModel: AlarmListViewModel = koinViewModel(),
-    onAlarmClick: (id : Long) -> Unit,
+    onAlarmClick: (id: Long) -> Unit,
     onAddAlarmClick: () -> Unit
 ) {
     AlarmListScreen(
@@ -73,28 +74,37 @@ private fun AlarmListScreen(
         }
     ) { padding ->
 
-
-
-            if (state.alarms.isEmpty()) {
-                Box(modifier = Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
-                    EmptyListInfo()
+        if (state.alarms.isEmpty()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding),
+                contentAlignment = Alignment.Center
+            ) {
+                EmptyListInfo()
+            }
+        } else {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.surface)
+                    .padding(padding)
+                    .padding(horizontal = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(state.alarms) { alarm ->
+                    AlarmListItem(
+                        alarmUi = alarm,
+                        onSwitchChange = { onAction(AlarmListAction.OnAlarmSwitchChange(alarm)) },
+                    )
                 }
-            } else {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface).padding(padding).padding(horizontal = 8.dp),
-                ) {
-                    items(state.alarms) { alarm ->
-                        AlarmListItem(
-                            alarmUi = alarm,
-
-                            )
-                    }
-                }
+            }
 
 
         }
     }
 }
+
 @Preview
 
 @Composable

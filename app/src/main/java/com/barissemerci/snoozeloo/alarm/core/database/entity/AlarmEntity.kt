@@ -9,6 +9,7 @@ data class AlarmEntity(
     val hour : Int,
     val minute : Int,
     val name : String,
+    val isEnabled : Boolean,
     @PrimaryKey(autoGenerate = true)
     val id : Long
 )

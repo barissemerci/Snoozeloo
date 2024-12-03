@@ -26,6 +26,7 @@ import com.barissemerci.snoozeloo.ui.theme.SnoozelooTheme
 
 @Composable
 fun AlarmListItem(
+    onSwitchChange: (Boolean) -> Unit = {},
     alarmUi: AlarmUi,
     modifier: Modifier = Modifier
 ) {
@@ -51,7 +52,7 @@ fun AlarmListItem(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = alarmUi.title, fontSize = 16.sp)
+                Text(text = alarmUi.title, fontSize = 16.sp, color = Color.Black)
                 Switch(
                     colors = SwitchDefaults.colors(
                         checkedThumbColor = Color.White,
@@ -59,8 +60,10 @@ fun AlarmListItem(
                         uncheckedThumbColor = Color.White,
                         uncheckedTrackColor = Color.Gray
                     ),
-                    checked = alarmUi.isSwitchOn,
-                    onCheckedChange = { /*TODO*/ },
+                    checked = alarmUi.isEnabled,
+                    onCheckedChange = {
+                        onSwitchChange(it)
+                    },
                 )
             }
             Row(
@@ -97,7 +100,8 @@ private fun AlarmListItemPreview() {
                 minute = 25,
                 amPm = "AM",
                 alarmInText = "Alarm in 50 min",
-                isSwitchOn = false
+                isEnabled = false,
+                id = 1
             )
         )
 

@@ -10,6 +10,17 @@ fun Alarm.toAlarmUi() : AlarmUi {
         minute = minute,
         amPm = "AM",
         alarmInText = "Alarm in 5 hours",
-        isSwitchOn = true
+        isEnabled = isEnabled,
+        id = id
+    )
+}
+
+fun AlarmUi.toAlarm() : Alarm {
+    return Alarm(
+        name = title,
+        hour = hour,
+        minute = minute,
+        isEnabled = isEnabled,
+        id = id
     )
 }
