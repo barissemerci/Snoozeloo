@@ -1,5 +1,6 @@
 package com.barissemerci.snoozeloo.alarm.alarm_detail.presentation
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -40,18 +42,30 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 
 fun AlarmDetailScreenRoot(
-
     viewModel: AlarmDetailViewModel = koinViewModel(),
     onCancelClick: () -> Unit,
-    id : Long?
+    onNavigateUpAfterSaved: () -> Unit,
+    id: Long?
 ) {
+    val context = LocalContext.current
 
     AlarmDetailScreen(
         state = viewModel.state,
-        onAction = {action ->
-            when(action){
+        onAction = { action ->
+            when (action) {
                 AlarmDetailAction.OnCancelClick -> {
+                    onCancelClick()
                 }
+
+                is AlarmDetailAction.OnSaveClick -> {
+                    Toast.makeText(
+                        context,
+                        R.string.alarm_saved,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    onNavigateUpAfterSaved()
+                }
+
                 else -> Unit
             }
             viewModel.onAction(action)
@@ -124,7 +138,7 @@ private fun AlarmDetailScreen(
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
 
-                ) {
+                    ) {
                     TimeTextField(
                         value = state.alarmHour,
                         onValueChange = { onAction(AlarmDetailAction.OnHourChange(it)) })
@@ -165,15 +179,17 @@ private fun AlarmDetailScreen(
                 Text(text = state.alarmName, fontSize = 14.sp)
             }
         }
-        if(state.isNameEditing){
+        if (state.isNameEditing) {
             SnoozelooDialog(
                 title = stringResource(R.string.alarm_name),
                 onDissmiss = { onAction(AlarmDetailAction.OnNameClick) },
-                onSaveClick = { onAction(AlarmDetailAction.OnSaveNameClick(it))
-                    focusManager.clearFocus()},
+                onSaveClick = {
+                    onAction(AlarmDetailAction.OnSaveNameClick(it))
+                    focusManager.clearFocus()
+                },
                 name = state.alarmName,
 
-            )
+                )
         }
 
 

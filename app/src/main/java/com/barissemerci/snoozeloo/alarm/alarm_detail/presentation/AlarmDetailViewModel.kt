@@ -18,10 +18,6 @@ class AlarmDetailViewModel(
 
     fun onAction(action: AlarmDetailAction) {
         when (action) {
-            AlarmDetailAction.OnCancelClick -> {
-                println("Cancel Clicked")
-            }
-
             is AlarmDetailAction.OnSaveClick -> {
                 saveAlarm()
                 println("Save Clicked with ${action.alarmHour} ${action.alarmMinute} ${action.alarmName}")
@@ -52,6 +48,8 @@ class AlarmDetailViewModel(
                     state = state.copy(alarmMinute = action.minute)
                 }
             }
+
+                else -> Unit
 
         }
     }

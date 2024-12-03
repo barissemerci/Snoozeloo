@@ -59,6 +59,9 @@ private fun NavGraphBuilder.alarmGraph(navController: NavHostController) {
                 id = id,
                 onCancelClick = {
                     navController.popBackStack()
+                },
+                onNavigateUpAfterSaved = {
+                    navController.popBackStack()
                 }
             )
         }

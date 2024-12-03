@@ -5,4 +5,5 @@
     <string name="save">Save</string>
     <string name="alarm_name">Alarm Name</string>
     <string name="enter_an_alarm_name">Enter an alarm name</string>
+    <string name="alarm_saved">Alarm saved successfully!</string>
 </resources>
