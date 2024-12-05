@@ -5,5 +5,5 @@ data class Alarm(
     val name: String,
     val hour : Int,
     val minute : Int,
-    val isEnabled : Boolean = true
+    val isEnabled : Boolean = false
 )

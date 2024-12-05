@@ -21,11 +21,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.barissemerci.snoozeloo.ui.AlarmIcon
 import com.barissemerci.snoozeloo.ui.theme.SnoozelooTheme
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 
 fun TriggeredAlarmScreenRoot(
+    modifier : Modifier = Modifier
 
 //viewModel:  = koinViewModel()
 

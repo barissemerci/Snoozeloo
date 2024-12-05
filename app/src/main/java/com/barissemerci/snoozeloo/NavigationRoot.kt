@@ -10,7 +10,6 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.barissemerci.snoozeloo.alarm.alarm_detail.presentation.AlarmDetailScreenRoot
 import com.barissemerci.snoozeloo.alarm.alarm_list.presentation.AlarmListScreenRoot
-import com.barissemerci.snoozeloo.alarm.triggered_alarm.presentation.TriggeredAlarmScreenRoot
 
 @Composable
 fun NavigationRoot(
@@ -24,7 +23,6 @@ fun NavigationRoot(
     }
 
 }
-
 private fun NavGraphBuilder.alarmGraph(navController: NavHostController) {
     navigation(
         route = "alarm",
@@ -65,14 +63,8 @@ private fun NavGraphBuilder.alarmGraph(navController: NavHostController) {
                 }
             )
         }
-        composable(
-            route = "triggered_alarm"
-        ) {
-            TriggeredAlarmScreenRoot(
-
-
-            )
-        }
-
     }
 }
+
+
+
