@@ -4,6 +4,7 @@ import com.barissemerci.snoozeloo.alarm.alarm_detail.presentation.AlarmDetailVie
 import com.barissemerci.snoozeloo.alarm.alarm_list.presentation.AlarmListViewModel
 import com.barissemerci.snoozeloo.alarm.core.data.AlarmRepositoryImpl
 import com.barissemerci.snoozeloo.alarm.core.domain.AlarmRepository
+import com.barissemerci.snoozeloo.alarm.triggered_alarm.presentation.TriggeredAlarmViewModel
 import com.barissemerci.snoozeloo.alarm.util.AlarmScheduler
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -17,6 +18,9 @@ val alarmModule = module {
     )
     viewModelOf(
         ::AlarmDetailViewModel
+    )
+    viewModelOf(
+        ::TriggeredAlarmViewModel
     )
     singleOf(::AlarmRepositoryImpl).bind<AlarmRepository>()
 

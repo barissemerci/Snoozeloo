@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import java.util.Calendar
 
 class AlarmScheduler(private val context: Context) {
@@ -15,6 +16,7 @@ class AlarmScheduler(private val context: Context) {
         val intent = Intent(context, AlarmReceiver::class.java).apply {
             putExtra("alarmId", alarmId)
         }
+        Log.i("AlarmScheduler", "Alarm id: $alarmId")
         val pendingIntent = PendingIntent.getBroadcast(
             context,
             alarmId.toInt(),

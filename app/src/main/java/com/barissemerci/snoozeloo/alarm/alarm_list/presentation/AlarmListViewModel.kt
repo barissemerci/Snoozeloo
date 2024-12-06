@@ -47,6 +47,7 @@ class AlarmListViewModel(
                 viewModelScope.launch {
                     alarmRepository.upsertAlarm(state.alarms.first { it.id == action.alarm.id }.toAlarm())
                 }
+                Log.i("AlarmListViewModel", "Alarm id: ${action.alarm.id}")
                 setAlarm(action.alarm.id ?: 0)
             }
 

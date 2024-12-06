@@ -21,21 +21,31 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.barissemerci.snoozeloo.ui.AlarmIcon
 import com.barissemerci.snoozeloo.ui.theme.SnoozelooTheme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 
 fun TriggeredAlarmScreenRoot(
-    modifier : Modifier = Modifier
-
-//viewModel:  = koinViewModel()
+    modifier: Modifier = Modifier,
+    onTurnOffClick: () -> Unit,
+    viewModel: TriggeredAlarmViewModel = koinViewModel()
 
 ) {
 
     TriggeredAlarmScreen(
 
-        //   state = viewModel.state,
+        state = viewModel.state,
 
-        //  onAction = viewModel::onAction
+        onAction =
+
+        { action ->
+            when (action) {
+                is TriggeredAlarmAction.OnTurnOffClick -> {
+                    viewModel.onAction(action)
+                    onTurnOffClick()
+                }
+            }
+        }
 
     )
 
@@ -45,9 +55,9 @@ fun TriggeredAlarmScreenRoot(
 
 private fun TriggeredAlarmScreen(
 
-    // state: ,
+    state: TriggeredAlarmState,
 
-    //   onAction: () -> Unit
+    onAction: (TriggeredAlarmAction) -> Unit
 
 ) {
 
@@ -65,15 +75,17 @@ private fun TriggeredAlarmScreen(
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "10:00",
+            text = "${state.alarmHour}:${state.alarmMinute}",
             fontSize = 82.sp,
             fontWeight = FontWeight.W500,
             color = MaterialTheme.colorScheme.primary
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "WORK", fontSize = 24.sp, fontWeight = FontWeight.W600)
+        Text(text = state.alarmName, fontSize = 24.sp, fontWeight = FontWeight.W600)
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = {}, modifier = Modifier.width(200.dp)) {
+        Button(onClick = {
+            onAction(TriggeredAlarmAction.OnTurnOffClick(state.alarmId))
+        }, modifier = Modifier.width(200.dp)) {
             Text(text = "Turn Off", fontSize = 24.sp, fontWeight = FontWeight.W600)
         }
     }
@@ -87,6 +99,13 @@ private fun TriggeredAlarmScreen(
 
 private fun TriggeredAlarmScreenPreview() {
     SnoozelooTheme {
-        TriggeredAlarmScreen()
+        TriggeredAlarmScreen(
+            state = TriggeredAlarmState(
+                alarmHour = 12,
+                alarmMinute = 30,
+                alarmName = "Alarm Name"
+            ),
+            onAction = {}
+        )
     }
 }
